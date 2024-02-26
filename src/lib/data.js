@@ -1,5 +1,5 @@
-export async function getTimeData(url) {
-  const res = await fetch(url);
+export async function getTimeData() {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

@@ -50,7 +50,7 @@ export default function ClockApp({ serverData }) {
     setLoaded(false);
 
     if (mounted) {
-      getTimeData(process.env.NEXT_PUBLIC_API_URL)
+      getTimeData()
         .then((t) => setTime(t))
         .then(() => setLoaded(true))
         .catch((e) => console.log(e))

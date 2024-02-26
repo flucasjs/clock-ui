@@ -1,11 +1,28 @@
 import { NextResponse } from "next/server";
 import Ipbase from "@everapi/ipbase-js";
+import { headers } from "next/headers";
 
 export async function GET() {
+  let clientIP = '';
+  const FALLBACK_IP = '0.0.0.0';
+
+  const forwardedFor = headers().get("x-forwarded-for");
+
+  if (forwardedFor) {
+    clientIP = forwardedFor.split(',')[0] ?? FALLBACK_IP;
+  } else {
+    clientIP = headers().get('x-real-ip') ?? FALLBACK_IP;
+  }
+  clientIP = clientIP.replace('::ffff:', '');
   const ipBase = new Ipbase(process.env.IPBASE_API_KEY);
   const worldTime = (ip) => `http://worldtimeapi.org/api/ip/${ip}`;
 
   try {
+    const clientData = await ipBase.info({
+      ip: clientIP,
+      language: 'en',
+    })
+
     const {
       data: {
         ip,
@@ -15,7 +32,7 @@ export async function GET() {
           country: { alpha2: country },
         },
       },
-    } = await ipBase.info();
+    } = clientData;
 
     const {
       datetime,
