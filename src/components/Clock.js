@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import themeIcons from "./themeIcons";
+import themeIcons from "../data/themeIcons";
 
 function formatTime(date) {
   const options = {

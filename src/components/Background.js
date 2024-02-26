@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import backgroundImages from "./backgroundImages";
+import backgroundImages from "../data/backgroundImages";
 
 export default function Background({ screen, theme }) {
   return (
