@@ -25,6 +25,7 @@ export default function ClockApp({ serverData }) {
   );
   const [time, setTime] = React.useState(null);
   const [loaded, setLoaded] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
   const ref = React.useRef(null);
   useClientWidth(ref, handleResize, 100);
@@ -46,12 +47,17 @@ export default function ClockApp({ serverData }) {
   }
 
   React.useEffect(() => {
-    setLoaded(false)
-    getTimeData(process.env.NEXT_PUBLIC_API_URL)
-      .then((t) => setTime(t))
-      .then(() => setLoaded(true))
-      .catch((e) => console.log(e));
-  }, []);
+    setLoaded(false);
+
+    if (mounted) {
+      getTimeData(process.env.NEXT_PUBLIC_API_URL)
+        .then((t) => setTime(t))
+        .then(() => setLoaded(true))
+        .catch((e) => console.log(e))
+    }
+  }, [mounted]);
+
+  React.useEffect(() => setMounted(true), []);
 
   return (
     <>

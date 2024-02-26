@@ -4,7 +4,7 @@ import { getQuotesData } from "@/lib/data";
 
 export default async function Home() {
   const quotes = await getQuotesData({ limit: 10 });
-  // const time = await getTimeData();
+
   return (
     <>
       {(quotes) ? (
