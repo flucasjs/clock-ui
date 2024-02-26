@@ -40,7 +40,7 @@ export default function Quote({ toggle, serverData }) {
   }
 
   React.useEffect(() => {
-    console.log(quotes);
+    // console.log(quotes);
   }, [quotes]);
 
   const FADE_UP_ANIMATION_VARIANTS = {
